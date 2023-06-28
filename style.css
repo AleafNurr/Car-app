@@ -1,0 +1,11 @@
+/* Body style */
+body{ 
+    margin: 0; /* Remove default margin */
+    background: darkgray; 
+    overflow: hidden; /* Remove scroll on whole page */
+    text-align: center; /* Center canvas */
+}
+/* Canvas style */
+#canvas{
+    background: lightgray;
+}
