@@ -34,13 +34,6 @@ class Road{
     draw(ctx){
         ctx.lineWidth = 5;
         ctx.strokeStyle = 'white'; 
-        ctx.setLineDash([]); 
-        this.borders.forEach(border => {
-            ctx.beginPath();
-            ctx.moveTo(border[0].x, border[0].y); // first point
-            ctx.lineTo(border[1].x, border[1].y); // second point
-            ctx.stroke();
-        });
 
         for(let i=1; i<=this.laneCount-1; i++){
             const x = lerp(this.left, this.right, i/(this.laneCount));
@@ -51,6 +44,14 @@ class Road{
             ctx.lineTo(x, this.bottom);
             ctx.stroke();
         }
+
+        ctx.setLineDash([]); 
+        this.borders.forEach(border => {
+            ctx.beginPath();
+            ctx.moveTo(border[0].x, border[0].y); // first point
+            ctx.lineTo(border[1].x, border[1].y); // second point
+            ctx.stroke();
+        });
     }
         
 }
