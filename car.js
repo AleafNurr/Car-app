@@ -126,7 +126,7 @@ class Car{
         this.y-=Math.cos(this.angle)*this.speed; 
     }
 
-    draw(ctx, colour){
+    draw(ctx, colour, drawSensors = false){
         if(this.polygon){
             if(this.damaged){
                 ctx.fillStyle = 'gray';
@@ -140,7 +140,7 @@ class Car{
             }
             ctx.fill();
 
-            if(this.sensors){
+            if(this.sensors && drawSensors){
                 this.sensors.draw(ctx);
             }
         }
