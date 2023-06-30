@@ -1,5 +1,5 @@
 class Car{
-    constructor(x, y, width, height){
+    constructor(x, y, width, height, controlType , maxSpeed = 3){
         this.x = x;
         this.y = y;
         this.width = width;
@@ -7,30 +7,41 @@ class Car{
 
         this.speed = 0;
         this.acceleration = 0.2;
-        this.maxSpeed = 3;
+        this.maxSpeed = maxSpeed;
         this.friction = 0.05;
 
         this.angle = 0;
 
         this.damaged = false;
-
-        this.sensors = new Sensor(this);
-        this.controls = new Controls();
+        
+        if(controlType != "DUMMY"){
+            this.sensors = new Sensor(this);
+        }
+        
+        this.controls = new Controls(controlType);
     }
 
-    update(roadBorders){
+    update(roadBorders, traffic){
         if(!this.damaged){
             this.#move();
             this.polygon = this.#createPolygon();
-            this.damaged = this.#assessDamage(roadBorders);
+            this.damaged = this.#assessDamage(roadBorders, traffic);
         }
-        
-        this.sensors.update(roadBorders);
+        if(this.sensors){
+            this.sensors.update(roadBorders, traffic);
+        }
+    
     }
 
-    #assessDamage(roadBorders){
+    #assessDamage(roadBorders, traffic){
         for(let i =0; i < roadBorders.length; i++){
             if(polysIntersect(this.polygon, roadBorders[i])){
+                return true;
+            }
+        }
+
+        for(let i =0; i < traffic.length; i++){
+            if(polysIntersect(this.polygon, traffic[i].polygon)){
                 return true;
             }
         }
@@ -42,8 +53,8 @@ class Car{
         const alpha = Math.atan2(this.width, this.height); // get the angle
         // calculate the points of the polygon then add to array
         points.push({
-            x: this.x - Math.sin(this.angle-alpha)*rad*3,
-            y: this.y - Math.cos(this.angle-alpha)*rad*3
+            x: this.x - Math.sin(this.angle-alpha)*rad,
+            y: this.y - Math.cos(this.angle-alpha)*rad
         });
         points.push({
             x: this.x - Math.sin(this.angle+alpha)*rad,
@@ -98,12 +109,12 @@ class Car{
         this.y-=Math.cos(this.angle)*this.speed; 
     }
 
-    draw(ctx){
+    draw(ctx, colour){
         if(this.polygon){
             if(this.damaged){
                 ctx.fillStyle = 'gray';
             } else {
-                ctx.fillStyle = 'black';
+                ctx.fillStyle = colour;
             }
             ctx.beginPath();
             ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
@@ -112,7 +123,9 @@ class Car{
             }
             ctx.fill();
 
-            this.sensors.draw(ctx);
+            if(this.sensors){
+                this.sensors.draw(ctx);
+            }
         }
     }
 }
