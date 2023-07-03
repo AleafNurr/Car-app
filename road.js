@@ -1,4 +1,4 @@
-import { lerp, getIntersection, polysIntersect } from "./utils.js";
+import { lerp } from "./utils.js";
 
 export class Road{
     constructor(x, width, laneCount=3){

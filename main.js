@@ -1,7 +1,6 @@
 import { Road } from "./road.js";
 import { Car } from "./car.js";
 import { NeuralNetwork } from "./network.js";
-import { lerp } from "./utils.js";
 
 const canvas = document.getElementById('canvas');
 canvas.width = 200;
@@ -41,13 +40,13 @@ function generateCars(N){
     return cars;
 }
 
-function save(){
+export function save(){
     localStorage.setItem('bestBrain', JSON.stringify(bestCar.brain));
     // reload the page
     location.reload();
 }
 
-function discard(){
+export function discard(){
     localStorage.removeItem('bestBrain');
     location.reload();
 }

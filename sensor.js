@@ -1,4 +1,4 @@
-import { lerp, getIntersection, polysIntersect } from "./utils.js";
+import { lerp, getIntersection } from "./utils.js";
 
 export class Sensor{
     constructor(car){
