@@ -1,3 +1,7 @@
+import { Road } from "./road.js";
+import { Car } from "./car.js";
+import { NeuralNetwork } from "./network.js";
+import { lerp } from "./utils.js";
 
 const canvas = document.getElementById('canvas');
 canvas.width = 200;

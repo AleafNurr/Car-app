@@ -6,7 +6,7 @@
  * Linear interpolation
  * @returns value between A and B by t
  */
-function lerp(A, B, t){
+export function lerp(A, B, t){
     return A + (B-A)*t;
 }
 
@@ -21,7 +21,7 @@ function lerp(A, B, t){
  * @returns {null} - if no intersection
  */
 
-function getIntersection(A,B,C,D){ 
+export function getIntersection(A,B,C,D){ 
     const tTop=(D.x-C.x)*(A.y-C.y)-(D.y-C.y)*(A.x-C.x);
     const uTop=(C.y-A.y)*(A.x-B.x)-(C.x-A.x)*(A.y-B.y);
     const bottom=(D.y-C.y)*(B.x-A.x)-(D.x-C.x)*(B.y-A.y);
@@ -47,7 +47,7 @@ function getIntersection(A,B,C,D){
  * @param {*} B - second polygon
  * @returns {Boolean} - true if the two polygons intersect 
  */
-function polysIntersect(A, B){
+export function polysIntersect(A, B){
     for(let i = 0; i < A.length; i++){
         for(let j = 0;j < B.length; j++){
             const touch=getIntersection(
