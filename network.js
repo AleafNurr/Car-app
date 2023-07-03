@@ -15,6 +15,26 @@ class NeuralNetwork{
         }
         return outputs;
     }
+    /*
+     * mutate (GA) the network
+     * if rate is 0, no mutation will occur
+     * if rate is 1, all weights and biases will be mutated
+     * if rate is between 0 and 1, weights and biases will be mutated by some amount (rate)
+     */
+    static mutate(network, mutationRate=1){
+        network.levels.forEach( level => {
+            for(let i = 0; i < level.biases.length; i++){
+                // use linear interpolation to mutate the biases 
+                level.biases[i] = lerp(level.biases[i], Math.random()*2-1, mutationRate);
+            }
+            for(let i = 0; i < level.weights.length; i++){
+                for(let j = 0; j < level.weights[i].length; j++){
+                    // use linear interpolation to mutate the weights
+                    level.weights[i][j] = lerp(level.weights[i][j], Math.random()*2-1, mutationRate);
+                }
+            }
+        });
+    }
 }
 
 class Level{

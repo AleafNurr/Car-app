@@ -38,7 +38,7 @@ class Road{
         for(let i=1; i<=this.laneCount-1; i++){
             const x = lerp(this.left, this.right, i/(this.laneCount));
             ctx.lineWidth = 3;
-            ctx.setLineDash([20, 20]); // TODO: 10px line, 10px space
+            ctx.setLineDash([20, 20]); 
             ctx.beginPath();
             ctx.moveTo(x, this.top);
             ctx.lineTo(x, this.bottom);
