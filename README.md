@@ -6,5 +6,3 @@ Saving the best performing 'brain' means that the next time the page is refreash
 This program also utilzes genetic operations such as muatation so that model performs better. <br>
 The links below cite the orignal source code as well as the tutorial which helped me build this simulation.
 
-Tutorial: https://www.youtube.com/watch?v=Rs_rAxEsAvI&list=PLnUm6-0y062WOSfXDw3VXoFXM5vR84joo&index=6 <br>
-Tutorial Code: https://github.com/gniziemazity/Self-driving-car
